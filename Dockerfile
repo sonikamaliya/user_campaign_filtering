@@ -1,7 +1,7 @@
 FROM ruby:3.2.2
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /user_campaign_filtering
+WORKDIR /user_campaign_filtering
 
 RUN apt-get update -qq && \
     apt-get -y install build-essential

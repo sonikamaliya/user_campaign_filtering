@@ -10,4 +10,5 @@
 #  updated_at     :datetime         not null
 #
 class User < ApplicationRecord
+  serialize :campaigns_list, Array
 end
