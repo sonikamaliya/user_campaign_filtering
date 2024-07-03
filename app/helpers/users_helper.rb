@@ -1,7 +1,7 @@
 module UsersHelper
   def filter_users_query(search_params)
     search_tearms = JSON.parse(search_params)
-    query = ""
+    query = "" 
     if search_tearms.length == 1
       query += " '#{search_tearms.first}')"
     else
