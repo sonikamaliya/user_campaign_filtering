@@ -1,24 +1,56 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Create users with campaign list and filter it using campaign name.
 
-Things you may want to cover:
+Github URL: https://github.com/sonikamaliya/user_campaign_filtering
 
-* Ruby version
+To run repository locally clone it from here: https://github.com/sonikamaliya/user_campaign_filtering
 
-* System dependencies
+open project folder and run bunde
 
-* Configuration
+  bundle install
 
-* Database creation
+And you can access apis locally through localhost:3000/endpoints
 
-* Database initialization
+List of APIs for users
 
-* How to run the test suite
+1. Retrieve all users from the database.
 
-* Services (job queues, cache servers, search engines, etc.)
+  Endpoint:  13.126.25.93:3000/users?page=1&per_page=5
 
-* Deployment instructions
+  Action: Get
 
-* ...
+  CURL:
+
+  curl --location '13.126.25.93:3000/users?page=1&per_page=5' \
+  --header 'Cookie: __profilin=p%3Dt'
+
+2. Search users based on multiple campaign name.
+
+    Endpoint: 13.126.25.93:3000/users?page=1&per_page=5&search=["campaign 1"]
+
+    Action: Get
+
+    CURL:
+
+      curl --location '13.126.25.93:3000/users?page=1&per_page=5&search=camp1' \
+      --header 'Cookie: __profilin=p%3Dt'
+
+3. Add a new user to the database with name, email, and campaigns_list.
+
+    Endpoint    13.126.25.93:3000/users
+
+    Action: Post
+
+    CURL:
+
+    curl --location '13.126.25.93:3000/users' \
+    --header 'Content-Type: application/json' \
+    --header 'Cookie: __profilin=p%3Dt' \
+    --data-raw '{
+        "users":{
+            "name": "teju",
+            "email": "teju@gmail.com",
+            "campaigns_list": {{campaigns_list}}
+        }
+    }'

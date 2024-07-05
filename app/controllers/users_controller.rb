@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   def index
     if params[:search].present?
-      @users = User.where(filter_users_query(params[:search])).paginate(page: page, per_page: per_page).decorate
+      search_params = params[:search].split(",")
+      @users = User.where(filter_users_query(search_params)).paginate(page: page, per_page: per_page).decorate
     else
       @users = User.all.order('created_at DESC').paginate(page: page, per_page: per_page).decorate
     end
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(name: params[:users][:name], email: params[:users][:email], campaigns_list: params[:users][:campaigns_list].as_json)
     if @user.save!
       render json: { user: @user, message: "User created successfully!" }, status: :ok
     else
@@ -24,6 +25,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:users).permit(:name, :email, campaigns_list: [:campaign_name, :camp_id])
+    params.require(:users).permit!
   end
 end
